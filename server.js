@@ -1,14 +1,16 @@
 const http = require('http')
 
-let faviconCount = 0
+let number = 256
 
-let requestCount = 0
+const server = http.createServer((req, res) => {
+    res.write(`Number: ${number}. `)
 
-const server = http.createServer((request, response) =>{
-    if(request.url !== '/favicon.ico'){
-        requestCount++
-    } else faviconCount++
+    if (req.url !== '/favicon.ico') {
+        number = Math.sqrt(number)
+    }
 
-    response.write(`Count request: ${requestCount}/favicon request: ${faviconCount}`)
-    response.end()
-}).listen(3000)
+    res.write(`Root number: ${number}`)
+    res.end()
+})
+
+server.listen(3000)

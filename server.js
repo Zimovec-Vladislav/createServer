@@ -1,8 +1,14 @@
 const http = require('http')
 
-const server = http.createServer((req, res) =>{
-    res.write('Its answer to client. ')
-    res.end('Its the end')
-})
+let faviconCount = 0
 
-server.listen(3000)
+let requestCount = 0
+
+const server = http.createServer((request, response) =>{
+    if(request.url !== '/favicon.ico'){
+        requestCount++
+    } else faviconCount++
+
+    response.write(`Count request: ${requestCount}/favicon request: ${faviconCount}`)
+    response.end()
+}).listen(3000)

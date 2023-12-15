@@ -1,15 +1,16 @@
 const http = require('http')
 
-let number = 256
-
 const server = http.createServer((req, res) => {
-    res.write(`Number: ${number}. `)
-
-    if (req.url !== '/favicon.ico') {
-        number = Math.sqrt(number)
+    switch(req.url) {
+        case '/Fe': res.write('Fe its iron')
+        break;
+        case '/Cu': res.write('Cu its copper')
+        break;
+        case '/Au': res.write('Au its gold')
+        break;
+        default: res.write('All elements')
     }
 
-    res.write(`Root number: ${number}`)
     res.end()
 })
 

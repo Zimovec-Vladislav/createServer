@@ -1,14 +1,15 @@
 const http = require('http')
 
-const server = http.createServer((req, res) => {
-    switch(req.url) {
-        case '/Fe': res.write('Fe its iron')
-        break;
-        case '/Cu': res.write('Cu its copper')
-        break;
-        case '/Au': res.write('Au its gold')
-        break;
-        default: res.write('All elements')
+const server = http.createServer((req, res) =>{
+
+    switch (req.url) {
+        case ('/undefined') : res.write('undefined')
+        break
+        case ('/boolean') : res.write('true and false')
+        break
+        case ('/number') : res.write('9346432')
+        break
+        default : res.write('Type of data')
     }
 
     res.end()

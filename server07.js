@@ -32,9 +32,6 @@ const server = http.createServer(function onRequest (req, res) {
         }
     }
     // End main code
-
-    res.statusCode = 404
-    res.end('oops')
   })
 })
 

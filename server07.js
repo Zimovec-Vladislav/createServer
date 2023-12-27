@@ -17,7 +17,7 @@ const server = http.createServer(function onRequest (req, res) {
         case '/home' : {
             fs.readFile('pages/home.html', (err, data) => {
               if (data) res.write(data)
-              else res.write('423 Locked')
+              else res.write('some error')
               res.end()
             })
             break

@@ -13,6 +13,19 @@ const server = http.createServer(function onRequest (req, res) {
 
     // Main code
     switch(req.url) {
+        case '/home' : {
+            const data = 'This is our home'
+            res.write(data)
+            res.end()
+            break
+        }
+
+        case '/about' : {
+            res.write('About this site')
+            res.end()
+            break
+        }
+
         default : {
             res.write('404 Not Found')
             res.end()

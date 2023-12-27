@@ -11,7 +11,14 @@ const server = http.createServer(function onRequest (req, res) {
   _favicon(req, res, function onNext (err) {
     if (err) return done(err)
 
-    // continue to process the request here, etc.
+    // Main code
+    switch(req.url) {
+        default : {
+            res.write('404 Not Found')
+            res.end()
+        }
+    }
+    // End main code
 
     res.statusCode = 404
     res.end('oops')

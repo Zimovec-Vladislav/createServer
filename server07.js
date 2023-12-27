@@ -15,8 +15,11 @@ const server = http.createServer(function onRequest (req, res) {
     // Main code
     switch(req.url) {
         case '/home' : {
-            const data = fs.readFileSync('pages/home.html')
-            res.write(data)
+            fs.readFile('pages/home.html', (err, data) => {
+              if (data) res.write(data)
+              else res.write('423 Locked')
+              res.end()
+            })
             break
         }
 

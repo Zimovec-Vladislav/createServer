@@ -2,6 +2,7 @@ const http = require('http')
 const favicon = require('serve-favicon')
 const finalhandler = require('finalhandler')
 const path = require('path')
+const fs = require('fs')
 
 const _favicon = favicon(path.join(__dirname, 'public', 'favicon.ico'))
 
@@ -14,9 +15,8 @@ const server = http.createServer(function onRequest (req, res) {
     // Main code
     switch(req.url) {
         case '/home' : {
-            const data = 'This is our home'
+            const data = fs.readFileSync('pages/home.html')
             res.write(data)
-            res.end()
             break
         }
 

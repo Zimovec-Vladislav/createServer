@@ -1,24 +1,20 @@
-const http = require('http')
+const http  = require('http')
+const fs = require('fs')
 
 const server = http.createServer((req, res) => {
-    
     switch (req.url) {
-        
         case '/home' : {
-            setTimeout(() => {
-                const data = 'Sell'
-                res.write(data)
-                res.end()
-            },5000)
+            const data = fs.readFileSync()
+            res.write(data)
             break
         }
 
         default : {
-            res.write("404 fuck off")
-            res.end()
+            res.write('404 page not found')
+            break
         }
-        
     }
+    res.end()
 })
 
 server.listen(3003)

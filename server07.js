@@ -18,7 +18,7 @@ const readFile = (path) => {
   return new Promise((resolve, reject) => {
     fs.readFile(path, (err, data) => {
       if (data) resolve(data)
-      else reject('some error')
+      else reject(err)
     })
   })
 }
@@ -32,9 +32,14 @@ const server = http.createServer(async function onRequest (req, res) {
     // Main code
     switch(req.url) {
         case '/home' : {
-          const data = await readFile('pages/home.html')
-          res.write(data)
-          res.end()
+          try {
+            const data = await readFile('pages/home.html')
+            res.write(data)
+            res.end()
+          } catch {
+            res.write('some error, 500')
+            res.end()
+          }
           break
         }
 

@@ -6,10 +6,18 @@ const fs = require('fs')
 
 const _favicon = favicon(path.join(__dirname, 'public', 'favicon.ico'))
 
-const server = http.createServer(function onRequest (req, res) {
+const delay = (ms) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve()
+    }, ms)
+  })
+}
+
+const server = http.createServer(async function onRequest (req, res) {
   const done = finalhandler(req, res)
 
-  _favicon(req, res, function onNext (err) {
+  _favicon(req, res, async function onNext (err) {
     if (err) return done(err)
 
     // Main code
@@ -24,9 +32,10 @@ const server = http.createServer(function onRequest (req, res) {
         }
 
         case '/about' : {
-            res.write('About this site')
-            res.end()
-            break
+          await delay(3000)
+          res.write('About this site')
+          res.end()
+          break
         }
 
         default : {

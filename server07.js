@@ -14,6 +14,15 @@ const delay = (ms) => {
   })
 }
 
+const readFile = (path) => {
+  return new Promise((resolve, reject) => {
+    fs.readFile(path, (err, data) => {
+      if (data) resolve(data)
+      else reject('some error')
+    })
+  })
+}
+
 const server = http.createServer(async function onRequest (req, res) {
   const done = finalhandler(req, res)
 
@@ -23,12 +32,10 @@ const server = http.createServer(async function onRequest (req, res) {
     // Main code
     switch(req.url) {
         case '/home' : {
-            fs.readFile('pages/home.html', (err, data) => {
-              if (data) res.write(data)
-              else res.write('some error')
-              res.end()
-            })
-            break
+          const data = await readFile('pages/home.html')
+          res.write(data)
+          res.end()
+          break
         }
 
         case '/about' : {
